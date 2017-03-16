@@ -1,0 +1,80 @@
+body {
+	background-image: url(../images/background.jpg);
+	background-repeat: no-repeat; 
+	background-size: cover;
+	margin: 0 auto;
+	background-color: #d3a45a;
+	font-family: "Patrick Hand", cursive;
+	color: #594424;
+	max-width: 1200px;
+}
+
+header {
+	text-align: center;
+	background-color: #d3a45a;
+	padding: 0 5px;
+	margin: 20px;
+	border: 10px #bd1a1f solid;
+}
+
+h1 {
+	padding: 20px;
+	border: 5px #33b5cc solid;
+	letter-spacing: 3px;
+	font-weight: bolder;
+}
+
+h2 {
+	padding: 20px;
+}
+
+button {
+	font-size: 40px;
+	letter-spacing: 10px;
+	border: 10px #33b5cc solid;
+	background-color: #d3a45a;
+	width: 280px;
+	height: 100px;
+	margin: 200px 450px 0 450px;
+}
+
+button:hover {
+	color: #bd1a1f;
+}
+
+
+
+#questiondiv {
+	height: 250px;
+	text-align: center;
+	background-color: #d3a45a;
+	padding: 20px;
+	margin: 20px;
+	border: 10px #33b5cc solid;
+	display: none;
+}
+
+#timerdiv {	
+	height: 250px;
+	text-align: center;
+	background-color: #d3a45a;
+	padding: 20px;
+	margin: 20px;
+	border: 10px #33b5cc solid;
+	display: none;
+}
+
+#choicesdiv {
+	text-align: center;
+	background-color: #d3a45a;
+	padding: 20px;
+	margin: 20px;
+	border: 10px #33b5cc solid;
+	display: none;
+}
+
+#choicesdiv h2 {
+	border: 5px #bd1a1f solid;
+}
+
+
