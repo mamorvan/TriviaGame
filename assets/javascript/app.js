@@ -5,7 +5,7 @@ var question1 = {
 	choice2: "Osiris",
 	choice3: "Anubis",
 	choice4: "Rameses",
-	image: "find pic of Ra"
+	image: "assets/images/ra.jpg"
 }
 
 var question2 = {
@@ -14,7 +14,7 @@ var question2 = {
 	choice2: "Narmer",
 	choice3: "Anubis",
 	choice4: "Ceasar",
-	image: "find palette of Narmer"
+	image: "assets/images/narmer.jpg"
 }
 
 var question3 = {
@@ -23,7 +23,7 @@ var question3 = {
 	choice2: "Wine",
 	choice3: "Milk",
 	choice4: "Beer",
-	image: "image of brewing or workers"
+	image: "assets/images/brewing.jpg"
 }
 
 var question4 = {
@@ -32,7 +32,7 @@ var question4 = {
 	choice2: "It was considered a part of traditional dress",
 	choice3: "It helped reduce glare from the sun",
 	choice4: "It was a symbol of great wealth",
-	image: "nefertiti bust"
+	image: "assets/images/nefertiti.jpeg"
 }
 
 var question5 = {
@@ -41,7 +41,7 @@ var question5 = {
 	choice2: "The wife of Rameses II",
 	choice3: "The protectress of Egypt and wife of Osiris",
 	choice4: "The daughter of Cleopatra and Ceasar",
-	image: "find pic of Isis"
+	image: "assets/images/isis.jpg"
 }
 
 var question6 = {
@@ -50,7 +50,7 @@ var question6 = {
 	choice2: "wine",
 	choice3: "kohl",
 	choice4: "organs",
-	image: "find pic of canopic jars"
+	image: "assets/images/canopicjars.jpg"
 }
 
 var question7 = {
@@ -59,7 +59,7 @@ var question7 = {
 	choice2: "It was mummified with the rest of the body",
 	choice3: "It was stored in a canopic jar with a baboon head top",
 	choice4: "It was taken out of the skull and dried out in the sun",
-	image: "find image of mummy"
+	image: "fassets/images/tut.jpg"
 }
 
 var question8 = {
@@ -68,7 +68,7 @@ var question8 = {
 	choice2: "human-headed Imsety",
 	choice3: "baboon-headed Hapi",
 	choice4: "falcon-headed Qebehsenuef",
-	image: "find image of jackal-headed"
+	image: "assets/images/jackalcanopic.jpg"
 }
 
 var question9 = {
@@ -77,7 +77,7 @@ var question9 = {
 	choice2: "Thoth",
 	choice3: "Hathor",
 	choice4: "Bastet",
-	image: "find pic of Bastet"
+	image: "assets/images/bastet.jpg"
 }
 
 var question10 = {
@@ -86,7 +86,7 @@ var question10 = {
 	choice2: "Cleopatra",
 	choice3: "Hatshepsut",
 	choice4: "There was never a female pharoah",
-	image: "pic of Hatshepsut"
+	image: "assets/images/hatshepsut.jpg"
 }
 
 //FUNCTIONS//
