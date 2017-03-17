@@ -28,6 +28,11 @@ h2 {
 	padding: 20px;
 }
 
+h3 {
+	font-size: 35px;
+	font-weight: bold;
+}
+
 button {
 	font-size: 40px;
 	letter-spacing: 10px;
@@ -42,8 +47,10 @@ button:hover {
 	color: #bd1a1f;
 }
 
+/*question div*/
+
 #questiondiv {
-	height: 250px;
+	height: 200px;
 	text-align: center;
 	background-color: #d3a45a;
 	padding: 20px;
@@ -52,8 +59,10 @@ button:hover {
 	display: none;
 }
 
+/*timer div*/
+
 #timerdiv {	
-	height: 250px;
+	height: 200px;
 	text-align: center;
 	background-color: #d3a45a;
 	padding: 20px;
@@ -61,6 +70,8 @@ button:hover {
 	border: 10px #33b5cc solid;
 	display: none;
 }
+
+/*choices div*/
 
 #choicesdiv {
 	text-align: center;
@@ -74,5 +85,22 @@ button:hover {
 #choicesdiv h2 {
 	border: 5px #bd1a1f solid;
 }
+
+#choicesdiv h2:hover {
+	border: 5px #33b5cc solid;
+	color: #bd1a1f;
+	background-color: #D5C350;
+	cursor: pointer;
+}
+
+#image {
+	display: none;
+	border: 5px #bd1a1f solid;
+	margin: 5px 5px 5px 85px;
+}
+
+#message {
+	display: none;
+	}
 
 
