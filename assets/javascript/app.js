@@ -1,13 +1,15 @@
 
-var questionsArray[
+var questionsArray = [
 {
 	question: "Who was the Ancient Egyptian sun god?",
 	choice1: "Ra",
 	choice2: "Osiris",
 	choice3: "Anubis",
 	choice4: "Rameses",
+	correct:"Ra",
 	image: "assets/images/ra.jpg",
-	alt: "Ra",
+	alt: "Ra"
+
 }, //end of question 1
 {
 	question: "Which king united Upper and Lower Egypt in 2900 B.C. and became the first pharoah?",
@@ -15,8 +17,9 @@ var questionsArray[
 	choice2: "Narmer",
 	choice3: "Anubis",
 	choice4: "Caesar",
+	correct: "Narmer",
 	image: "assets/images/narmer.jpg",
-	alt: "palette of Narmer",
+	alt: "palette of Narmer"
 },//end of question2
 {
 	question: "What was the most common drink in Ancient Egypt?",
@@ -24,8 +27,9 @@ var questionsArray[
 	choice2: "Wine",
 	choice3: "Milk",
 	choice4: "Beer",
+	correct: "Beer",
 	image: "assets/images/brewing.jpg",
-	alt: "picking hops wall painting",
+	alt: "picking hops wall painting"
 },//end of question3
 {
 	question: "Why did Ancient Egyptian men and women wear kohl on their eyes?",
@@ -33,8 +37,9 @@ var questionsArray[
 	choice2: "It was considered a part of traditional dress",
 	choice3: "It helped reduce glare from the sun",
 	choice4: "It was a symbol of great wealth",
+	correct: "It helped reduce glare from the sun",
 	image: "assets/images/nefertiti.jpeg",
-	alt: "bust of Nefertiti",
+	alt: "bust of Nefertiti"
 },//end of question4
 {
 	question: "Who was Isis?",
@@ -42,8 +47,9 @@ var questionsArray[
 	choice2: "The wife of Rameses II",
 	choice3: "The protectress of Egypt and wife of Osiris",
 	choice4: "The daughter of Cleopatra and Ceasar",
+	correct: "The protectress of Egypt and wife of Osiris",
 	image: "assets/images/isis.jpg",
-	alt: "Isis",
+	alt: "Isis"
 },//end of question5
  {
 	question: "What was stored in canopic jars?",
@@ -51,8 +57,9 @@ var questionsArray[
 	choice2: "wine",
 	choice3: "kohl",
 	choice4: "organs",
+	correct: "organs",
 	image: "assets/images/canopicjars.jpg",
-	alt: "Canopic jars",
+	alt: "Canopic jars"
 },//end of question6
 {
 	question: "What happened to the brain during mummification?",
@@ -60,8 +67,9 @@ var questionsArray[
 	choice2: "It was mummified with the rest of the body",
 	choice3: "It was stored in a canopic jar with a baboon head top",
 	choice4: "It was taken out of the skull and dried out in the sun",
+	correct: "It was extracted through the nose and thrown away",
 	image: "assets/images/tut.jpg",
-	alt: "sarcophagus of Tutankhamun",
+	alt: "sarcophagus of Tutankhamun"
 },//end of question7
 {
 	question: "Which canopic jar was the stomach stored in during mummification?",
@@ -69,8 +77,9 @@ var questionsArray[
 	choice2: "human-headed Imsety",
 	choice3: "baboon-headed Hapi",
 	choice4: "falcon-headed Qebehsenuef",
+	correct: "jackal-headed Duamutef",
 	image: "assets/images/jackalcanopic.jpg",
-	alt: "Jackal-headed canopic jar",
+	alt: "Jackal-headed canopic jar"
 },//end of question8
 {
 	question: "Who was the Ancient Egyptian goddess of cats and home?",
@@ -78,8 +87,9 @@ var questionsArray[
 	choice2: "Thoth",
 	choice3: "Hathor",
 	choice4: "Bastet",
+	correct: "Bastet",
 	image: "assets/images/bastet.jpg",
-	alt: "Bastet statue from British Museum",
+	alt: "Bastet statue from British Museum"
 },//end of question9
 {
 	question: "Who was the first female pharoah?",
@@ -87,53 +97,58 @@ var questionsArray[
 	choice2: "Cleopatra",
 	choice3: "Hatshepsut",
 	choice4: "There was never a female pharoah",
+	correct: "Hatshepsut",
 	image: "assets/images/hatshepsut.jpg",
-	alt: "Hatshepsut as sphinx",
+	alt: "Hatshepsut as sphinx"
 }//end of question10
 ]//end of questionsArray
 
 var play = {
-	timeLeft: 30,
+	timeLeft: 5,
+	timer: 0,
 	correct: 0,
 	incorrect: 0,
 	timedout: 0,
 
-	start: function() {
+	start: function(index) {
+		$("#start").on("click", function() {
 	//hide button, display question, timer and choices divs
 		$("#start").css("display","none");
 		$("#questiondiv").css("display","block");
 		$("#timerdiv").css("display","block");
 		$("#choicesdiv").css("display","block");
-	},  //end of start method
+		play.displayQuestion(index);
+		
+		}); //end of onclick
+	},//end of start method
 
-	displayQuestion: function() {
-		$("#question").text(this.question);
-		$("#choice1").text(this.correct);
-		$("#choice2").text(this.choice2);
-		$("#choice3").text(this.choice3);
-		$("#choice4").text(this.choice4);
+	displayQuestion: function(index) {
+		$("#question").text(questionsArray[index].question);
+		$("#choice1").text(questionsArray[index].choice1);
+		$("#choice2").text(questionsArray[index].choice2);
+		$("#choice3").text(questionsArray[index].choice3);
+		$("#choice4").text(questionsArray[index].choice4);
 
-		timer30();
+		play.timer30(index);
 	}, //end of displayQuestion method
 
-	timer30: function() {	
-		var timeLeft = 30
-		var intervalId;
+	timer30: function(index) {	
+		
 
-		intervalId = setInterval(decrement, 1000);
+		play.timer = setInterval(decrement, 1000);
 
 		function decrement() {
-			timeLeft--;
-			$("#timer").text(timeLeft);
+			play.timeLeft--;
+			$("#timer").text(play.timeLeft);
 
 			//if timer runs out
-			if(timeLeft === 0) {
-				clearInterval(intervalId);
+			if(play.timeLeft === 0) {
+				clearInterval(play.timer);
 				
-				$("#image").attr({"src":currentObject.image,"alt":currentObject.alt});
+				$("#image").attr({"src":questionsArray[index].image,"alt":questionsArray[index].alt});
 				$(".choice").css("display","none");
 				$("#image").css("display", "block");
-				$("#message").text("You've run out of time!  The correct answer was " + currentObject.correct + ".");
+				$("#message").text("You've run out of time!  The correct answer was " + questionsArray[index].correct + ".");
 				$("#message").css("display", "block");
 			} //end of if time runs out		
 		} //end of decrement function
@@ -146,8 +161,8 @@ var play = {
 
 //MAIN PROCESS//
 
-//start game when start button clicked//
-$("#start").on("click", play.start());
+play.start(2);
+
 
 
 
