@@ -117,6 +117,7 @@ var play = {
 		$("#questiondiv").css("display","block");
 		$("#timerdiv").css("display","block");
 		$("#choicesdiv").css("display","block");
+
 		play.displayQuestion(index);
 		
 		}); //end of onclick
@@ -134,7 +135,6 @@ var play = {
 
 	timer30: function(index) {	
 		
-
 		play.timer = setInterval(decrement, 1000);
 
 		function decrement() {
@@ -152,7 +152,23 @@ var play = {
 				$("#message").css("display", "block");
 			} //end of if time runs out		
 		} //end of decrement function
-	}//end of method
+	},//end of timer30 method
+
+	correct: function() {
+
+	},//end of correct method
+
+	incorrect: function() {
+
+	}, // end of incorrect method
+
+	results: function() {
+		//add reset button
+	},//end of results method
+
+	clear: function() {
+
+	}//end of clear function
 
 
 
@@ -163,7 +179,13 @@ var play = {
 
 play.start(2);
 
-
+//if correct play.correct
+$(".choice").on("click", function(){
+var answerPicked = $(this).text();
+console.log(answerPicked);
+})
+//if incorrect play.incorrect
+//if run out of questions play.results
 
 
 
