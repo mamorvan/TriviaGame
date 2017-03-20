@@ -112,9 +112,9 @@ var play = {
 	index: 0,
 
 	start: function() {	
-		//hide buttons, display question, timer and choices divs
+		//hide button 
 		$("#start").css("display","none");
-		
+		//display question, timer and choices divs
 		$("#questiondiv").css("display","block");
 		$("#timerdiv").css("display","block");
 		$("#choicesdiv").css("display","block");
@@ -122,19 +122,9 @@ var play = {
 		play.nextQuestion(0);		
 	},//end of start method
 
-	// displayQuestion: function(index) {
-	// 	$("#question").text(questionsArray[index].question);
-	// 	$("#choice1").text(questionsArray[index].choice1);
-	// 	$("#choice2").text(questionsArray[index].choice2);
-	// 	$("#choice3").text(questionsArray[index].choice3);
-	// 	$("#choice4").text(questionsArray[index].choice4);
-
-	// 	play.timer20();
-	// }, //end of displayQuestion method
-
 	nextQuestion: function(index) {
 		//reset timer and display
-		play.timeLeft = 20;
+		play.timeLeft = 5;
 		$("#timer").text(play.timeLeft);
 		//hide image and message divs and restart button if needed
 		$("#restart").css("display","none");
@@ -143,8 +133,7 @@ var play = {
 		//display question and choice divs
 		$("#questiondiv").css("display","block");
 		$(".choice").css("display","block");
-
-		
+	
 		$("#question").text(questionsArray[index].question);
 		$("#choice1").text(questionsArray[index].choice1);
 		$("#choice2").text(questionsArray[index].choice2);
@@ -152,7 +141,6 @@ var play = {
 		$("#choice4").text(questionsArray[index].choice4);
 
 		play.timer20();
-
 	}, //end of nextQuestion method
 
 	timer20: function() {	
@@ -166,28 +154,13 @@ var play = {
 			if (play.timeLeft <= 0) {
 			play.timeOut(play.index);
 			} //end of if time runs out			
-		}//end of decrement function
-
-		$(".choice").on("click", function(){
-
-			var answerPicked = $(this).text();
-
-			if (answerPicked === questionsArray[play.index].correct) {
-				console.log(play.index);
-				play.correct(play.index);
-			}
-			else {
-				console.log(play.index);
-				play.incorrect(play.index);
-
-			}
-		}) //end of choice click		
+		}//end of decrement function	
 	},//end of timer20 method
 
 	timeOut: function(index) {
-
 		clearInterval(play.timer);
 		play.timedout++;
+console.log("timedout method works." + play.timedout);
 		
 		$("#image").attr({"src":questionsArray[index].image,"alt":questionsArray[index].alt});
 		$(".choice").css("display","none");
@@ -210,7 +183,7 @@ var play = {
 	correct: function(index) {
 		clearInterval(play.timer);
 		play.correct++;
-console.log(play.correct)		
+console.log(play.correct);		
 				
 		$("#image").attr({"src":questionsArray[index].image,"alt":questionsArray[index].alt});
 		$(".choice").css("display","none");
@@ -231,6 +204,7 @@ console.log(play.correct)
 	incorrect: function(index) {
 		clearInterval(play.timer);
 		play.incorrect++;
+console.log(play.incorrect);
 		
 		$("#image").attr({"src":questionsArray[index].image,"alt":questionsArray[index].alt});
 		$(".choice").css("display","none");
@@ -249,15 +223,11 @@ console.log(play.correct)
 	}, // end of incorrect method
 
 	results: function() {
-		$("#image").attr({"src":"assets/images/scarab.jpg","alt":"end image"});
-		
-		
-		
+		$("#image").attr({"src":"assets/images/scarab.jpg","alt":"end image"});		
 		$("#message").html("<span>You've finished! How did you do?</span> <p>Correct: " + play.correct + "<br>Incorrect: " + play.incorrect + "<br>Timed Out: " + play.timedout + "</p>");
 		
-		//add reset button
-		$("#questiondiv").html("<button id='restart'> Try Again? </button>");
-
+		//add restart button
+		$("#question").html("<button id='restart'> Try Again? </button>");
 		$(document).on("click","#restart", function() {
 			play.restart();
 		})
@@ -270,19 +240,29 @@ console.log(play.correct)
 		play.index = 0;
 
 		play.nextQuestion(0);
-
-
-	}//end of clear function
-
-
-
+	}//end of restart method
 }//end of play object
 
 
 //MAIN PROCESS//
 $("#start").on("click", function() {
 	play.start();
-})
+});
+
+$(".choice").on("click", function(){
+
+	var answerPicked = $(this).text();
+console.log(answerPicked);
+
+	if (answerPicked === questionsArray[play.index].correct) {
+console.log("play.correct should work here! array index is: " + play.index);
+		play.correct(play.index);
+	}
+	else {
+console.log("play.incorrect should work here! array index is: " + play.index);
+		play.incorrect(play.index);
+	}
+}) //end of choice click	
 
 
 
