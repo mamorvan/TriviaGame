@@ -106,8 +106,8 @@ var questionsArray = [
 var play = {
 	timeLeft: 20,
 	timer: 0,
-	correct: 0,
-	incorrect: 0,
+	correctCount: 0,
+	incorrectCount: 0,
 	timedout: 0,
 	index: 0,
 
@@ -124,7 +124,7 @@ var play = {
 
 	nextQuestion: function(index) {
 		//reset timer and display
-		play.timeLeft = 5;
+		play.timeLeft = 20;
 		$("#timer").text(play.timeLeft);
 		//hide image and message divs and restart button if needed
 		$("#restart").css("display","none");
@@ -182,8 +182,8 @@ console.log("timedout method works." + play.timedout);
 
 	correct: function(index) {
 		clearInterval(play.timer);
-		play.correct++;
-console.log(play.correct);		
+		play.correctCount++;
+console.log(play.correctCount);		
 				
 		$("#image").attr({"src":questionsArray[index].image,"alt":questionsArray[index].alt});
 		$(".choice").css("display","none");
@@ -203,8 +203,8 @@ console.log(play.correct);
 
 	incorrect: function(index) {
 		clearInterval(play.timer);
-		play.incorrect++;
-console.log(play.incorrect);
+		play.incorrectCount++;
+console.log(play.incorrectCount);
 		
 		$("#image").attr({"src":questionsArray[index].image,"alt":questionsArray[index].alt});
 		$(".choice").css("display","none");
@@ -224,7 +224,7 @@ console.log(play.incorrect);
 
 	results: function() {
 		$("#image").attr({"src":"assets/images/scarab.jpg","alt":"end image"});		
-		$("#message").html("<span>You've finished! How did you do?</span> <p>Correct: " + play.correct + "<br>Incorrect: " + play.incorrect + "<br>Timed Out: " + play.timedout + "</p>");
+		$("#message").html("<span>You've finished! How did you do?</span> <p>Correct: " + play.correctCount + "<br>Incorrect: " + play.incorrectCount + "<br>Timed Out: " + play.timedout + "</p>");
 		
 		//add restart button
 		$("#question").html("<button id='restart'> Try Again? </button>");
@@ -234,8 +234,8 @@ console.log(play.incorrect);
 	},//end of results method
 
 	restart: function() {
-		play.correct = 0;
-		play.incorrect = 0;
+		play.correctCount = 0;
+		play.incorrectCount = 0;
 		play.timedout = 0;
 		play.index = 0;
 
