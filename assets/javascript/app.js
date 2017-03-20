@@ -104,21 +104,22 @@ var questionsArray = [
 ]//end of questionsArray
 
 var play = {
-	timeLeft: 5,
+	timeLeft: 30,
 	timer: 0,
 	correct: 0,
 	incorrect: 0,
 	timedout: 0,
+	index: 0,
 
-	start: function(index) {
+	start: function() {
 		$("#start").on("click", function() {
-	//hide button, display question, timer and choices divs
+		//hide button, display question, timer and choices divs
 		$("#start").css("display","none");
 		$("#questiondiv").css("display","block");
 		$("#timerdiv").css("display","block");
 		$("#choicesdiv").css("display","block");
 
-		play.displayQuestion(index);
+		play.displayQuestion(0);
 		
 		}); //end of onclick
 	},//end of start method
@@ -130,35 +131,107 @@ var play = {
 		$("#choice3").text(questionsArray[index].choice3);
 		$("#choice4").text(questionsArray[index].choice4);
 
-		play.timer30(index);
+		play.timer30();
 	}, //end of displayQuestion method
 
-	timer30: function(index) {	
+	nextQuestion: function(index) {
+		//reset timer and display
+		play.timeLeft = 30;
+		$("#timer").text(play.timeLeft);
+		//hide image and message divs
+		$(".choice").css("display","block");
+		$("#image").css("display", "none");	
+		$("#message").css("display", "none");
+		//display question and choice divs
+		$("#question").text(questionsArray[index].question);
+		$("#choice1").text(questionsArray[index].choice1);
+		$("#choice2").text(questionsArray[index].choice2);
+		$("#choice3").text(questionsArray[index].choice3);
+		$("#choice4").text(questionsArray[index].choice4);
+
+		play.timer30();
+
+	}, //end of nextQuestion method
+
+	timer30: function() {	
 		
 		play.timer = setInterval(decrement, 1000);
 
 		function decrement() {
 			play.timeLeft--;
 			$("#timer").text(play.timeLeft);
+//if timer runs out
+			if (play.timeLeft <= 0) {
+			play.timeOut(play.index);
+			} //end of if time runs out			
+		}//end of decrement function
 
-			//if timer runs out
-			if(play.timeLeft === 0) {
-				clearInterval(play.timer);
+		$(".choice").on("click", function(){
+
+			var answerPicked = $(this).text();
+
+			if (answerPicked === questionsArray[play.index].correct) {
+				console.log(play.index);
+				play.correct(play.index);
+			}
+			else {
+				console.log(play.index);
+				play.incorrect(play.index);
+			}
+		}) //end of choice click
+
+			
+		
 				
-				$("#image").attr({"src":questionsArray[index].image,"alt":questionsArray[index].alt});
-				$(".choice").css("display","none");
-				$("#image").css("display", "block");
-				$("#message").text("You've run out of time!  The correct answer was " + questionsArray[index].correct + ".");
-				$("#message").css("display", "block");
-			} //end of if time runs out		
-		} //end of decrement function
+		
 	},//end of timer30 method
 
-	correct: function() {
+	timeOut: function(index) {
 
+		clearInterval(play.timer);
+		play.timedout++;
+		
+		$("#image").attr({"src":questionsArray[index].image,"alt":questionsArray[index].alt});
+		$(".choice").css("display","none");
+		$("#image").css("display", "block");
+		$("#message").text("You've run out of time!  The correct answer was " + questionsArray[index].correct + ".");
+		$("#message").css("display", "block");
+		setTimeout(function() {
+			play.index++;
+			play.nextQuestion(play.index);
+		}, 5000);
+	},//end of timeOut method
+
+
+	correct: function(index) {
+		clearInterval(play.timer);
+		play.correct++;
+				
+		$("#image").attr({"src":questionsArray[index].image,"alt":questionsArray[index].alt});
+		$(".choice").css("display","none");
+		$("#image").css("display", "block");
+		$("#message").text("You're right!");
+		$("#message").css("display", "block");
+		setTimeout(function() {
+			play.index++;
+			play.nextQuestion(play.index);
+		}, 5000);		
 	},//end of correct method
 
-	incorrect: function() {
+	incorrect: function(index) {
+		clearInterval(play.timer);
+		play.incorrect++;
+		
+		$("#image").attr({"src":questionsArray[index].image,"alt":questionsArray[index].alt});
+		$(".choice").css("display","none");
+		$("#image").css("display", "block");
+		$("#message").text("Wrong answer.  The correct answer was " + questionsArray[index].correct + ".");
+		$("#message").css("display", "block");
+		setTimeout(function() {
+			play.index++;
+			play.nextQuestion(play.index);
+		}, 5000);
+		
 
 	}, // end of incorrect method
 
@@ -177,15 +250,12 @@ var play = {
 
 //MAIN PROCESS//
 
-play.start(2);
+play.start();
 
-//if correct play.correct
-$(".choice").on("click", function(){
-var answerPicked = $(this).text();
-console.log(answerPicked);
-})
-//if incorrect play.incorrect
-//if run out of questions play.results
+
+
+
+
 
 
 
