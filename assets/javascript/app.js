@@ -23,18 +23,18 @@ var questionsArray = [
 },//end of question2
 {
 	question: "What was the most common drink in Ancient Egypt?",
-	choice1: "Water",
-	choice2: "Wine",
-	choice3: "Milk",
-	choice4: "Beer",
-	correct: "Beer",
+	choice1: "water",
+	choice2: "wine",
+	choice3: "milk",
+	choice4: "beer",
+	correct: "beer",
 	image: "assets/images/brewing.jpg",
 	alt: "picking hops wall painting"
 },//end of question3
 {
 	question: "Why did Ancient Egyptian men and women wear kohl on their eyes?",
 	choice1: "It was a symbol of devotion to Ra",
-	choice2: "It was considered a part of traditional dress",
+	choice2: "It was a part of traditional dress",
 	choice3: "It helped reduce glare from the sun",
 	choice4: "It was a symbol of great wealth",
 	correct: "It helped reduce glare from the sun",
@@ -43,11 +43,11 @@ var questionsArray = [
 },//end of question4
 {
 	question: "Who was Isis?",
-	choice1: "A Roman empress who lived in Ancient Egypt",
-	choice2: "The wife of Rameses II",
-	choice3: "The protectress of Egypt and wife of Osiris",
-	choice4: "The daughter of Cleopatra and Ceasar",
-	correct: "The protectress of Egypt and wife of Osiris",
+	choice1: "a Roman empress who lived in Ancient Egypt",
+	choice2: "the wife of Rameses II",
+	choice3: "the protectress of Egypt and wife of Osiris",
+	choice4: "the daughter of Cleopatra and Caesar",
+	correct: "the protectress of Egypt and wife of Osiris",
 	image: "assets/images/isis.jpg",
 	alt: "Isis"
 },//end of question5
@@ -63,11 +63,11 @@ var questionsArray = [
 },//end of question6
 {
 	question: "What happened to the brain during mummification?",
-	choice1: "It was extracted through the nose and thrown away",
-	choice2: "It was mummified with the rest of the body",
-	choice3: "It was stored in a canopic jar with a baboon head top",
-	choice4: "It was taken out of the skull and dried out in the sun",
-	correct: "It was extracted through the nose and thrown away",
+	choice1: "it was extracted through the nose and thrown away",
+	choice2: "it was mummified along with the rest of the body",
+	choice3: "it was stored in a canopic jar with a baboon head top",
+	choice4: "it was taken out of the skull and dried out in the sun",
+	correct: "it was extracted through the nose and thrown away",
 	image: "assets/images/tut.jpg",
 	alt: "sarcophagus of Tutankhamun"
 },//end of question7
@@ -104,7 +104,7 @@ var questionsArray = [
 ]//end of questionsArray
 
 var play = {
-	timeLeft: 30,
+	timeLeft: 20,
 	timer: 0,
 	correct: 0,
 	incorrect: 0,
@@ -121,7 +121,7 @@ var play = {
 
 		play.displayQuestion(0);
 		
-		}); //end of onclick
+		}); //end of onclick start buton
 	},//end of start method
 
 	displayQuestion: function(index) {
@@ -136,7 +136,7 @@ var play = {
 
 	nextQuestion: function(index) {
 		//reset timer and display
-		play.timeLeft = 30;
+		play.timeLeft = 20;
 		$("#timer").text(play.timeLeft);
 		//hide image and message divs
 		$(".choice").css("display","block");
@@ -160,7 +160,7 @@ var play = {
 		function decrement() {
 			play.timeLeft--;
 			$("#timer").text(play.timeLeft);
-//if timer runs out
+			//if timer runs out
 			if (play.timeLeft <= 0) {
 			play.timeOut(play.index);
 			} //end of if time runs out			
@@ -177,13 +177,9 @@ var play = {
 			else {
 				console.log(play.index);
 				play.incorrect(play.index);
-			}
-		}) //end of choice click
 
-			
-		
-				
-		
+			}
+		}) //end of choice click		
 	},//end of timer30 method
 
 	timeOut: function(index) {
@@ -198,8 +194,14 @@ var play = {
 		$("#message").css("display", "block");
 		setTimeout(function() {
 			play.index++;
-			play.nextQuestion(play.index);
+			if (play.index === questionsArray.length) {
+				play.results();
+			} //end of if run out of questions, run results
+			else {
+				play.nextQuestion(play.index);
+			}
 		}, 5000);
+
 	},//end of timeOut method
 
 
@@ -214,7 +216,12 @@ var play = {
 		$("#message").css("display", "block");
 		setTimeout(function() {
 			play.index++;
-			play.nextQuestion(play.index);
+			if (play.index === questionsArray.length) {
+				play.results();
+			}//end of if run out of questions, run results
+			else {
+				play.nextQuestion(play.index);
+			}
 		}, 5000);		
 	},//end of correct method
 
@@ -229,17 +236,38 @@ var play = {
 		$("#message").css("display", "block");
 		setTimeout(function() {
 			play.index++;
-			play.nextQuestion(play.index);
+			if (play.index === questionsArray.length) {
+				play.results();
+			}//end of if run out of questions, run results
+			else {
+				play.nextQuestion(play.index);
+			}
 		}, 5000);
-		
-
 	}, // end of incorrect method
 
 	results: function() {
+		$("#image").attr({"src":"assets/images/scarab.jpg","alt":"end image"});
+		
+		
+		
+		$("#message").html("<span>You've finished! How did you do?</span> <p>Correct: " + play.correct + "<br>Incorrect: " + play.incorrect + "<br>Timed Out: " + play.timedout + "</p>");
+		
 		//add reset button
+		$("#image").append("<button id='restart'> Try Again? </button>");
+
+		$(document).on("click","#restart", function() {
+			play.restart();
+		})
 	},//end of results method
 
-	clear: function() {
+	restart: function() {
+		play.correct = 0;
+		play.incorrect = 0;
+		play.timedout = 0;
+		play.index = 0;
+
+		play.start();
+
 
 	}//end of clear function
 
