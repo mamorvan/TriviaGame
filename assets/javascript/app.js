@@ -33,11 +33,11 @@ var questionsArray = [
 },//end of question3
 {
 	question: "Why did Ancient Egyptian men and women wear kohl on their eyes?",
-	choice1: "It was a symbol of devotion to Ra",
-	choice2: "It was a part of traditional dress",
-	choice3: "It helped reduce glare from the sun",
-	choice4: "It was a symbol of great wealth",
-	correct: "It helped reduce glare from the sun",
+	choice1: "it was a symbol of devotion to Ra",
+	choice2: "it was a part of traditional dress",
+	choice3: "it helped reduce glare from the sun",
+	choice4: "it was a symbol of great wealth",
+	correct: "it helped reduce glare from the sun",
 	image: "assets/images/nefertiti.jpeg",
 	alt: "bust of Nefertiti"
 },//end of question4
@@ -111,49 +111,51 @@ var play = {
 	timedout: 0,
 	index: 0,
 
-	start: function() {
-		$("#start").on("click", function() {
-		//hide button, display question, timer and choices divs
+	start: function() {	
+		//hide buttons, display question, timer and choices divs
 		$("#start").css("display","none");
+		
 		$("#questiondiv").css("display","block");
 		$("#timerdiv").css("display","block");
 		$("#choicesdiv").css("display","block");
 
-		play.displayQuestion(0);
-		
-		}); //end of onclick start buton
+		play.nextQuestion(0);		
 	},//end of start method
 
-	displayQuestion: function(index) {
-		$("#question").text(questionsArray[index].question);
-		$("#choice1").text(questionsArray[index].choice1);
-		$("#choice2").text(questionsArray[index].choice2);
-		$("#choice3").text(questionsArray[index].choice3);
-		$("#choice4").text(questionsArray[index].choice4);
+	// displayQuestion: function(index) {
+	// 	$("#question").text(questionsArray[index].question);
+	// 	$("#choice1").text(questionsArray[index].choice1);
+	// 	$("#choice2").text(questionsArray[index].choice2);
+	// 	$("#choice3").text(questionsArray[index].choice3);
+	// 	$("#choice4").text(questionsArray[index].choice4);
 
-		play.timer30();
-	}, //end of displayQuestion method
+	// 	play.timer20();
+	// }, //end of displayQuestion method
 
 	nextQuestion: function(index) {
 		//reset timer and display
 		play.timeLeft = 20;
 		$("#timer").text(play.timeLeft);
-		//hide image and message divs
-		$(".choice").css("display","block");
+		//hide image and message divs and restart button if needed
+		$("#restart").css("display","none");
 		$("#image").css("display", "none");	
 		$("#message").css("display", "none");
 		//display question and choice divs
+		$("#questiondiv").css("display","block");
+		$(".choice").css("display","block");
+
+		
 		$("#question").text(questionsArray[index].question);
 		$("#choice1").text(questionsArray[index].choice1);
 		$("#choice2").text(questionsArray[index].choice2);
 		$("#choice3").text(questionsArray[index].choice3);
 		$("#choice4").text(questionsArray[index].choice4);
 
-		play.timer30();
+		play.timer20();
 
 	}, //end of nextQuestion method
 
-	timer30: function() {	
+	timer20: function() {	
 		
 		play.timer = setInterval(decrement, 1000);
 
@@ -180,7 +182,7 @@ var play = {
 
 			}
 		}) //end of choice click		
-	},//end of timer30 method
+	},//end of timer20 method
 
 	timeOut: function(index) {
 
@@ -208,6 +210,7 @@ var play = {
 	correct: function(index) {
 		clearInterval(play.timer);
 		play.correct++;
+console.log(play.correct)		
 				
 		$("#image").attr({"src":questionsArray[index].image,"alt":questionsArray[index].alt});
 		$(".choice").css("display","none");
@@ -253,7 +256,7 @@ var play = {
 		$("#message").html("<span>You've finished! How did you do?</span> <p>Correct: " + play.correct + "<br>Incorrect: " + play.incorrect + "<br>Timed Out: " + play.timedout + "</p>");
 		
 		//add reset button
-		$("#image").append("<button id='restart'> Try Again? </button>");
+		$("#questiondiv").html("<button id='restart'> Try Again? </button>");
 
 		$(document).on("click","#restart", function() {
 			play.restart();
@@ -266,7 +269,7 @@ var play = {
 		play.timedout = 0;
 		play.index = 0;
 
-		play.start();
+		play.nextQuestion(0);
 
 
 	}//end of clear function
@@ -277,8 +280,9 @@ var play = {
 
 
 //MAIN PROCESS//
-
-play.start();
+$("#start").on("click", function() {
+	play.start();
+})
 
 
 
