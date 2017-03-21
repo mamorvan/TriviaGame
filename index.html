@@ -11,6 +11,7 @@
 
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
 
 	<link href="https://fonts.googleapis.com/css?family=Neucha|Patrick+Hand" rel="stylesheet">
 
@@ -37,7 +38,7 @@
 				</div> <!--end of question div-->
 			</div> <!--end of question div centered 6 col-->
 			<div class="col-md-3">
-				<div id="timerdiv"><h2>TIME LEFT<br><br><span id="timer">30</span></h2></div>
+				<div id="timerdiv"><h2>TIME LEFT<br><br><span id="timer">20</span></h2></div>
 			</div> <!--end of timer col 3-->
 		</div> <!--end of question div row-->
 
@@ -46,12 +47,16 @@
 			<div class="row">
 
 				<div class="col-md-6">
+					<!--create image to show on answer-->
 					<img id="image" src="" alt="" width="250">
+					<!--h2s to hold choices-->
 					<h2 id="choice1" class="choice">choice 1</h2>
 					<h2 id="choice3" class="choice">choice 3</h2>
 				</div> <!-- end of choices column1 -->
 				<div class="col-md-6">
+					<!--h3 to hold win/lose/timeout message-->
 					<h3 id="message"></h3>
+					<!--h2s to hold choices-->
 					<h2 id="choice2" class="choice">choice 2</h2>
 					<h2 id="choice4" class="choice">choice 4</h2>
 				</div> <!-- end of choices column2-->
@@ -60,9 +65,6 @@
 		</div> <!-- end of choices div -->
 	</main>
 
-	
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
 	<script src="assets/javascript/app.js"></script>
 </body>
 </html>

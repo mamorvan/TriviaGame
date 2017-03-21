@@ -112,7 +112,7 @@ var play = {
 	index: 0,
 
 	start: function() {	
-		//hide button 
+		//hide start button 
 		$("#start").css("display","none");
 		//display question, timer and choices divs
 		$("#questiondiv").css("display","block");
@@ -123,7 +123,7 @@ var play = {
 	},//end of start method
 
 	nextQuestion: function(index) {
-		clearInterval(play.timer);
+		clearInterval(play.timer); //make sure this is here! or questions will get faster and faster
 		//reset timer and display
 		play.timeLeft = 20;
 		$("#timer").text(play.timeLeft);
@@ -177,13 +177,12 @@ var play = {
 				play.nextQuestion(play.index);
 			}
 		}, 5000);
-		
-
 	},//end of timeOut method
 
 
 	correct: function(index) {
 		clearInterval(play.timer);
+
 		play.correctCount++;
 				
 		$("#image").attr({"src":questionsArray[index].image,"alt":questionsArray[index].alt});
@@ -199,12 +198,12 @@ var play = {
 			else {
 				play.nextQuestion(play.index);
 			}
-		}, 5000);
-				
+		}, 5000);				
 	},//end of correct method
 
 	incorrect: function(index) {
 		clearInterval(play.timer);
+
 		play.incorrectCount++;
 		
 		$("#image").attr({"src":questionsArray[index].image,"alt":questionsArray[index].alt});
@@ -220,8 +219,7 @@ var play = {
 			else {
 				play.nextQuestion(play.index);
 			}
-		}, 5000);
-		
+		}, 5000);		
 	}, // end of incorrect method
 
 	results: function() {
