@@ -125,7 +125,7 @@ var play = {
 	nextQuestion: function(index) {
 		clearInterval(play.timer);
 		//reset timer and display
-		play.timeLeft = 5;
+		play.timeLeft = 20;
 		$("#timer").text(play.timeLeft);
 		//hide image and message divs and restart button if needed
 		$("#restart").css("display","none");
